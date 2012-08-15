@@ -1,6 +1,8 @@
 #!/bin/sh
 # Copyright (c) 2007, Nanako Shiraishi
 
+cd $GIT_WORK_TREE
+
 dashless=$(basename "$0" | sed -e 's/-/ /')
 USAGE="list [<options>]
    or: $dashless show [<stash>]
@@ -14,8 +16,8 @@ USAGE="list [<options>]
 SUBDIRECTORY_OK=Yes
 OPTIONS_SPEC=
 START_DIR=`pwd`
-. git-sh-setup
-. git-sh-i18n
+. /usr/lib/git-core/git-sh-setup
+. /usr/lib/git-core/git-sh-i18n
 require_work_tree
 cd_to_toplevel
 
