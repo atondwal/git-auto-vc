@@ -63,9 +63,10 @@ int main(int argc, char **argv)
 		kchanges[i] = ke;
 	}
 
-	/* wait indefinitely for an event to occur on the file */
-	struct kevent events[1];
-	kevent(kq, kchanges, argc, events, 1, NULL);
-
-	exit(0);
+	while (1) {
+		/* wait indefinitely for an event to occur on the file */
+		struct kevent events[1];
+		kevent(kq, kchanges, argc, events, 1, NULL);
+		printf("EVENT");
+	}
 }
