@@ -234,29 +234,6 @@ save_stash () {
 	git update-ref -m "$stash_msg" $ref_stash $w_commit ||
 		die "$(gettext "Cannot save the current status")"
 	say Saved working directory and index state "$stash_msg"
-
-	if test -z "$patch_mode"
-	then
-		git reset --hard ${GIT_QUIET:+-q}
-		test "$untracked" = "all" && CLEAN_X_OPTION=-x || CLEAN_X_OPTION=
-		if test -n "$untracked"
-		then
-			git clean --force --quiet -d $CLEAN_X_OPTION
-		fi
-
-		if test "$keep_index" = "t" && test -n $i_tree
-		then
-			git read-tree --reset -u $i_tree
-		fi
-	else
-		git apply -R < "$TMP-patch" ||
-		die "$(gettext "Cannot remove worktree changes")"
-
-		if test "$keep_index" != "t"
-		then
-			git reset
-		fi
-	fi
 }
 
 have_stash () {
